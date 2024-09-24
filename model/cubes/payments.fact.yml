@@ -1,0 +1,74 @@
+cubes:
+- description: payments_fact
+  dimensions:
+  - name: account_id
+    sql: '{CUBE}.account_id'
+    type: string
+  - name: company_id
+    sql: '{CUBE}.company_id'
+    type: string
+  - name: currency_code
+    sql: '{CUBE}.currency_code'
+    type: string
+  - name: invoice_id
+    sql: '{CUBE}.invoice_id'
+    type: string
+  - name: invoice_number
+    sql: '{CUBE}.invoice_number'
+    type: string
+  - name: payment_invoice_fk
+    public: false
+    sql: '{CUBE}.payment_invoice_fk'
+    type: string
+  - name: invoice_type
+    sql: '{CUBE}.invoice_type'
+    type: string
+  - name: payment_amount
+    sql: safe_cast({CUBE}.payment_amount as float64)
+    type: number
+  - name: payment_bank_amount
+    sql: safe_cast({CUBE}.payment_bank_amount as float64)
+    type: number
+  - name: payment_code
+    sql: '{CUBE}.payment_code'
+    type: string
+  - name: payment_currency_rate
+    sql: '{CUBE}.payment_currency_rate'
+    type: string
+  - name: payment_id
+    sql: '{CUBE}.payment_id'
+    type: string
+  - name: payment_is_discounted
+    sql: '{CUBE}.payment_is_discounted'
+    type: boolean
+  - name: payment_is_reconciled
+    sql: '{CUBE}.payment_is_reconciled'
+    type: boolean
+  - name: payment_pk
+    public: false
+    sql: '{CUBE}.payment_pk'
+    type: string
+  - name: payment_reference
+    sql: '{CUBE}.payment_reference'
+    type: string
+  - name: payment_status
+    sql: '{CUBE}.payment_status'
+    type: string
+  - name: payment_type
+    sql: '{CUBE}.payment_type'
+    type: string
+  - name: source
+    sql: '{CUBE}.source'
+    type: string
+  - name: payment
+    sql: '{CUBE}.payment_date'
+    type: time
+  joins: []
+  measures:
+  - name: total_payment_amount
+    sql: '{CUBE}.payment_amount'
+    type: sum
+  - name: count
+    type: count
+  name: payments_fact
+  sql_table: 'ra-development.analytics.payments_fact'
