@@ -1,7 +1,7 @@
 cube(`companies_dim`, {
   sql: `with company_aggs as (
           SELECT company_pk,
-            if(sum(case when i.invoice_status in ("Open","Paid"') then i.total_gbp_amount end) >0,if(sum(case when t.timesheet_is_billable then t.timesheet_hours_billed end)>0,true,false),false) as is_customer,
+            if(sum(case when i.invoice_status in ("Open","Paid") then i.total_gbp_amount end) >0,if(sum(case when t.timesheet_is_billable then t.timesheet_hours_billed end)>0,true,false),false) as is_customer,
             if(sum(case when p.invoice_status != "Voided" then p.total_gbp_amount end) >0,true,false) as is_supplier
           from analytics.companies_dim c 
           left join ra-development.analytics.invoices_fact i
